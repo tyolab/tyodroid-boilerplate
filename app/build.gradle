@@ -1,22 +1,125 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
+
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 1
+// alpha, beta, rc, rtm, ga, rtw, or empty
+def versionRelease = "a"
+def buildNumber = 1
+
+def buildTime() {
+    // optional "yyyy-MM-dd'T'HH:mm'Z'"
+    def df = new SimpleDateFormat("yyyyMMddHHmm")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    return df.format(new Date())
+}
+
+def versionFullName = "${versionMajor}.${versionMinor}.${versionPatch}${versionRelease}"
+def buildName = "build${buildTime()}"
 
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
+
     defaultConfig {
         applicationId "au.com.tyo.inventory"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode "${buildNumber}".toInteger()
+        versionName "${versionFullName}"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            /**
+             * for gradle 2.3.*
+             */
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    project.ext { appName = 'roundtrip' }
+                    def newName = output.outputFile.name
+                    newName = newName.replace("-release", "-release-" + versionFullName)
+                    //noinspection GroovyAssignabilityCheck
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                    // outputFileName = newName
+                }
+            }
+            /**
+             * for gradle 3.0 / android studio 3.*
+             */
+            /*
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    project.ext { appName = 'roundtrip' }
+                    def newName = output.outputFile.name
+                    newName = newName.replaceWith("-release", "-release-" + versionFullName)
+                    //noinspection GroovyAssignabilityCheck
+                    outputFileName = newName
+                }
+            }
+            */
+
+            /**
+             * The dev build config
+             */
+            buildConfigField "String", "BUILD_ID", "\"" + versionFullName + "-" + buildName + "\""
+            // buildConfigField "boolean", "DEBUG", "false"
+        }
+
+        debug {
+            /**
+             * The  prod build config
+             */
+            buildConfigField "String", "BUILD_ID", "\"" + versionFullName + "-" + buildName + "\""
+            //buildConfigField "boolean", "DEBUG", "true"
+            /*
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    project.ext { appName = 'roundtrip' }
+                    def newName = output.outputFile.name
+                    newName = newName.replaceWith("-bebug", "-debug-" + versionFullName)
+                    //noinspection GroovyAssignabilityCheck
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                    // outputFileName = newName
+                }
+            }
+            */
+            /**
+             * for gradle 3.0 / android studio 3.*
+             */
+            /*
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    project.ext { appName = 'roundtrip' }
+                    def newName = output.outputFile.name
+                    newName = newName.replaceWith("-debug", "-debug" + versionFullName)
+                    //noinspection GroovyAssignabilityCheck
+                    outputFileName = newName
+                }
+            }
+            */
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        ignoreWarnings = true
+        checkAllWarnings false
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {

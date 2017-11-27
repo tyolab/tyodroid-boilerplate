@@ -7,4 +7,7 @@ import au.com.tyo.inventory.ui.UI;
  */
 
 public interface Controller extends au.com.tyo.app.Controller<UI> {
+
+    boolean hasUserLoggedIn();
+
 }
