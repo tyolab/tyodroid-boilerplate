@@ -22,6 +22,10 @@ public class PageMain extends PageCommon {
     public void onActivityStart() {
         super.onActivityStart();
 
+        if (!controller.hasUserLoggedIn()) {
+            controller.getUi().gotoLoginPage();
 
+            finish();
+        }
     }
 }

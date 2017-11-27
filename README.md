@@ -1,2 +1,3 @@
-# tyodroid-sample
-A sample project for using tyodroid framework
+# TYO WooCommerce
+
+An Android app for inventory management for projects using WordPress with WooCommerce.

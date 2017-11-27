@@ -5,4 +5,7 @@ package au.com.tyo.inventory.ui;
  */
 
 public interface UI extends au.com.tyo.app.ui.UI {
+
+    void gotoLoginPage();
+
 }
