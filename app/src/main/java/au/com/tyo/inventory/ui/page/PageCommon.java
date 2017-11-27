@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import au.com.tyo.app.Controller;
 import au.com.tyo.app.ui.Page;
+import au.com.tyo.inventory.R;
 
 /**
  * Created by Eric Tang (eric.tang@tyo.com.au) on 27/11/17.
@@ -21,6 +22,11 @@ public class PageCommon extends Page {
         super(controller, activity);
 
         this.controller = (au.com.tyo.inventory.Controller) controller;
+
+        int color = activity.getResources().getColor(R.color.toolbarColor);
+        setToolbarColor(color);
+        int colorWhite = activity.getResources().getColor(R.color.white);
+        setPageToolbarTitleColor(colorWhite);
     }
 
 }
