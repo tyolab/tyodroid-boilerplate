@@ -23,10 +23,8 @@ public class PageCommon extends Page {
 
         this.controller = (au.com.tyo.inventory.Controller) controller;
 
-        int color = activity.getResources().getColor(R.color.toolbarColor);
-        setToolbarColor(color);
-        int colorWhite = activity.getResources().getColor(R.color.white);
-        setPageToolbarTitleColor(colorWhite);
+        toolbarColor = activity.getResources().getColor(R.color.toolbarColor);
+        titleTextColor = activity.getResources().getColor(R.color.white);
     }
 
 }
