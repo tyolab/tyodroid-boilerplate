@@ -1,0 +1,8 @@
+// App Libraries
+include ':CommonUtils', ':CommonAndroid', ':CommonUiLib', ':CommonAppLib'
+
+// Service Library
+// include ':CommonServices', ':CommonServicesDroid'
+
+// App
+// include ':app'
