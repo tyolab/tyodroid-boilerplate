@@ -1,33 +1,93 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
 
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 1
+// alpha, beta, rc, rtm, ga, rtw, or empty
+def versionRelease = "a"
+def buildNumber = 1
+
+def buildTime() {
+    // optional "yyyy-MM-dd'T'HH:mm'Z'"
+    def df = new SimpleDateFormat("yyyyMMddHHmm")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    return df.format(new Date())
+}
+
+def versionFullName = "${versionMajor}.${versionMinor}.${versionPatch}${versionRelease}"
+def buildName = "build${buildTime()}"
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
-        applicationId "au.com.tyo.droid.sample"
-        minSdkVersion 15
+        applicationId "au.com.tyo.sample"
+        minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode "${buildNumber}".toInteger()
+        versionName "${versionFullName}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            /**
+             * for gradle 2.3.*
+             */
+
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    project.ext { appName = 'app' }
+                    def newName = appName + "-release-" + versionFullName + ".apk"
+                    outputFileName = newName
+                }
+            }
+
+            /**
+             * The dev build config
+             */
+            buildConfigField "String", "BUILD_ID", "\"" + versionFullName + "-" + buildName + "\""
+            // buildConfigField "boolean", "DEBUG", "false"
+        }
+
+        debug {
+            /**
+             * The  prod build config
+             */
+            buildConfigField "String", "BUILD_ID", "\"" + versionFullName + "-" + buildName + "\""
+            //buildConfigField "boolean", "DEBUG", "true"
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        ignoreWarnings = true
+        checkAllWarnings false
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.google.android.gms:play-services-maps:11.0.4'
-    testCompile 'junit:junit:4.12'
+
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+    compile 'com.android.support:appcompat-v7:26.+'
+
+    compile project(path: ':CommonAppLib')
+
+//    testCompile 'junit:junit:4.12'
 }

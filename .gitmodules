@@ -1,12 +1,28 @@
-[submodule "CommonAndroid"]
-	path = CommonAndroid
-	url = https://github.com/tyolab/CommonAndroid.git
 [submodule "CommonUtils"]
 	path = CommonUtils
-	url = https://github.com/tyolab/CommonUtils.git
+	url = git@github.com:tyolab/CommonUtils.git
+	branch = master
 [submodule "CommonUiLib"]
 	path = CommonUiLib
-	url = https://github.com/tyolab/CommonUiLib.git
+	url = git@github.com:tyolab/CommonUiLib.git
+	branch = master
 [submodule "CommonAppLib"]
 	path = CommonAppLib
-	url = https://github.com/tyolab/CommonAppLib.git
+	url = git@github.com:tyolab/CommonAppLib.git
+	branch = master
+[submodule "CommonAndroid"]
+	path = CommonAndroid
+	url = git@github.com:tyolab/CommonAndroid.git
+	branch = master
+[submodule "CommonServices"]
+	path = CommonServices
+	url = git@github.com:tyolab/CommonServices.git
+	branch = master
+[submodule "CommonServicesDroid"]
+	path = CommonServicesDroid
+	url = git@github.com:tyolab/CommonServicesDroid.git
+	branch = master
+[submodule "CommonJsonForm"]
+	path = CommonJsonForm
+	url = git@github.com:tyolab/CommonJsonForm.git
+	branch = master

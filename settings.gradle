@@ -2,7 +2,10 @@
 include ':CommonUtils', ':CommonAndroid', ':CommonUiLib', ':CommonAppLib'
 
 // Service Library
-// include ':CommonServices', ':CommonServicesDroid'
+include ':CommonServices'
+
+// Droid Services like geolocation
+include ':CommonServicesDroid'
 
 // App
-// include ':app'
+include ':app'
