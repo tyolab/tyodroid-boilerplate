@@ -1,3 +1,5 @@
-# TYO WooCommerce
+# TYODROID BOILERPLATE
 
-An Android app for inventory management for projects using WordPress with WooCommerce.
+A boilerplate android App that uses tyodroid framework for easy android App development.
+
+# Things to do
