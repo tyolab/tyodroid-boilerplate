@@ -10,10 +10,6 @@
 	path = CommonAppLib
 	url = git@github.com:tyolab/CommonAppLib.git
 	branch = master
-[submodule "CommonAndroid"]
-	path = CommonAndroid
-	url = git@github.com:tyolab/CommonAndroid.git
-	branch = master
 [submodule "CommonServices"]
 	path = CommonServices
 	url = git@github.com:tyolab/CommonServices.git
@@ -25,4 +21,8 @@
 [submodule "CommonJsonForm"]
 	path = CommonJsonForm
 	url = git@github.com:tyolab/CommonJsonForm.git
+	branch = master
+[submodule "CommonAndroid"]
+	path = CommonAndroid
+	url = git@github.com:tyolab/CommonAndroid.git
 	branch = master
