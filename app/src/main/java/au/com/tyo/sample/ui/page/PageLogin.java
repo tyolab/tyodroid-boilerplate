@@ -3,7 +3,7 @@ package au.com.tyo.sample.ui.page;
 import android.app.Activity;
 
 import au.com.tyo.app.Controller;
-import au.com.tyo.inventory.R;
+import au.com.tyo.sample.R;
 
 /**
  * Created by Eric Tang (eric.tang@tyo.com.au) on 27/11/17.
