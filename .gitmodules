@@ -26,3 +26,6 @@
 	path = CommonAndroid
 	url = git@github.com:tyolab/CommonAndroid.git
 	branch = master
+[submodule "CommonJsonFormDroid"]
+	path = CommonJsonFormDroid
+	url = git@github.com:tyolab/CommonJsonFormDroid.git
