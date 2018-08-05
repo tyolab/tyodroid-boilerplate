@@ -1,6 +1,7 @@
 package au.com.tyo.sample;
 
 import android.content.Context;
+import android.content.Intent;
 
 import au.com.tyo.app.CommonApp;
 import au.com.tyo.app.PageAgent;
@@ -24,5 +25,10 @@ public class App extends CommonApp<UI, Controller> implements Controller {
     @Override
     public boolean hasUserLoggedIn() {
         return false;
+    }
+
+    @Override
+    public void bindDataFromOtherApps(Intent intent) {
+        // do nothing until we have such requirement
     }
 }

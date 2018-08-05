@@ -6,8 +6,9 @@ def versionMajor = 0
 def versionMinor = 0
 def versionPatch = 1
 // alpha, beta, rc, rtm, ga, rtw, or empty
-def versionRelease = "a"
+def versionRelease = ""
 def buildNumber = 1
+def buildType = "release"
 
 def buildTime() {
     // optional "yyyy-MM-dd'T'HH:mm'Z'"
@@ -16,7 +17,7 @@ def buildTime() {
     return df.format(new Date())
 }
 
-def versionFullName = "${versionMajor}.${versionMinor}.${versionPatch}${versionRelease}"
+def versionFullName = "${versionMajor}.${versionMinor}.${versionPatch}.${versionRelease}"
 def buildName = "build${buildTime()}"
 
 android {
@@ -43,7 +44,7 @@ android {
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->
                     project.ext { appName = 'app' }
-                    def newName = appName + "-" + buildType + "-v" + versionFullName + "-b" + buildNumber + forUse + ".apk"
+                    def newName = appName + "-" + buildType + "-v" + versionFullName + "-b" + buildNumber + ".apk"
                     outputFileName = newName
                 }
             }
@@ -59,6 +60,8 @@ android {
             /**
              * The  prod build config
              */
+            buildType = "debug"
+
             buildConfigField "String", "BUILD_ID", "\"" + versionFullName + "-b" + buildNumber + " (Debug)\""
             //buildConfigField "boolean", "DEBUG", "true"
         }
