@@ -12,12 +12,16 @@ import au.com.tyo.sample.R;
 
 public class PageCommon extends Page<Controller> {
 
+    protected Controller controller;
+
     /**
      * @param controller
      * @param activity
      */
     public PageCommon(Controller controller, Activity activity) {
         super(controller, activity);
+
+        this.controller = controller;
 
         toolbarColor = activity.getResources().getColor(R.color.toolbarColor);
         titleTextColor = activity.getResources().getColor(R.color.white);

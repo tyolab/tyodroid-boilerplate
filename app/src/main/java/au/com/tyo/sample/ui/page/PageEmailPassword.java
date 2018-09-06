@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
-import au.com.tyo.app.Controller;
+import au.com.tyo.sample.Controller;
 import au.com.tyo.sample.R;
 
 /**
