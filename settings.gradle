@@ -1,3 +1,7 @@
+
+// App Json Libraries
+include ':CommonJsonForm', ':CommonJsonFormDroid'
+
 // App Libraries
 include ':CommonUtils', ':CommonAndroid', ':CommonUiLib', ':CommonAppLib'
 
